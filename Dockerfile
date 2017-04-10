@@ -1,4 +1,4 @@
-# ArchiSteamFarmFROM mono:latest
+FROM mono:latest
 
 LABEL author="Jat <chat@jat.email>"
 LABEL version="0.0.1"
