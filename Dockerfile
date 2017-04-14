@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y jq
 RUN mkdir -p /opt/asf/config
 WORKDIR /opt/asf
 
-RUN curl -o ASF.exe $(curl https://api.github.com/repos/JustArchi/ArchiSteamFarm/releases/latest | jq '.assets[] | select(.name == "ASF.exe").browser_download_url')
+RUN curl -Lo ASF.exe $(curl https://api.github.com/repos/JustArchi/ArchiSteamFarm/releases/latest | jq -r '.assets[] | select(.name == "ASF.exe").browser_download_url')
 
 VOLUME /opt/asf/config
 
