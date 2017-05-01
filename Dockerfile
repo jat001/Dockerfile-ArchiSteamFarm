@@ -1,7 +1,7 @@
 FROM mono:latest
 
 LABEL author="Jat <chat@jat.email>"
-LABEL version="0.0.2"
+LABEL version="2.3.1.2-1"
 
 RUN echo 'deb http://deb.debian.org/debian wheezy-backports main contrib non-free' >> /etc/apt/sources.list
 RUN apt-get update && apt-get install -y jq
