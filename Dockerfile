@@ -14,3 +14,4 @@ RUN curl -Lo ASF.exe $(curl https://api.github.com/repos/JustArchi/ArchiSteamFar
 VOLUME /opt/asf/config
 
 ENTRYPOINT ["mono", "/opt/asf/ASF.exe"]
+CMD ["--server"]
