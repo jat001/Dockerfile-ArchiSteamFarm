@@ -11,7 +11,7 @@ before_script:
   - docker login -u=jat001 -p="$DOCKER_PASSWD"
 
 script:
-  - docker build -t jat001/archisteamfarm:$VER --build-arg "URL=$URL" .
+  - docker build -t jat001/archisteamfarm:$VER --build-arg "VER=$VER" --build-arg "URL=$URL" .
   - docker tag jat001/archisteamfarm:$VER jat001/archisteamfarm:latest
 
   - docker push jat001/archisteamfarm:$VER
