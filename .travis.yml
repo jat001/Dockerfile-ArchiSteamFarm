@@ -1,18 +1,23 @@
 services:
   - docker
 
+env:
+  - NAME=jat001/archisteamfarm
+
 install: true
 
 before_script:
   - REL=$(curl https://api.github.com/repos/JustArchi/ArchiSteamFarm/releases/latest)
   - VER=$(echo "$REL" | jq -r '.tag_name')
-  - URL=$(echo "$REL" | jq -r '.assets[] | select(.name == "ASF.exe").browser_download_url')
 
+  - docker pull "$NAME:$VER" && travis_terminate 0
   - docker login -u=jat001 -p="$DOCKER_PASSWD"
 
 script:
-  - docker build -t "jat001/archisteamfarm:$VER" --build-arg "VER=$VER" --build-arg "URL=$URL" .
-  - docker tag "jat001/archisteamfarm:$VER" jat001/archisteamfarm:latest
+  - curl -Lo ASF.exe "$(echo '$REL' | jq -r '.assets[] | select(.name == "ASF.exe").browser_download_url')"
 
-  - docker push "jat001/archisteamfarm:$VER"
-  - docker push jat001/archisteamfarm:latest
+  - docker build -t "$NAME:$VER" --build-arg "VER=$VER" .
+  - docker tag "$NAME:$VER" "$NAME:latest"
+
+  - docker push "$NAME:$VER"
+  - docker push "$NAME:latest"

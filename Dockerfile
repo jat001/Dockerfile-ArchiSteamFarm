@@ -8,8 +8,7 @@ RUN mkdir -p /opt/asf/config
 VOLUME /opt/asf/config
 WORKDIR /opt/asf
 
-ARG URL
-RUN curl -Lo ASF.exe "$URL"
+COPY ASF.exe .
 
-ENTRYPOINT ["mono", "/opt/asf/ASF.exe"]
+ENTRYPOINT ["mono", "ASF.exe"]
 CMD ["--server"]
