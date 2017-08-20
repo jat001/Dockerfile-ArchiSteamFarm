@@ -4,7 +4,7 @@ LABEL author="Jat <chat@jat.email>"
 ARG VER
 LABEL version=$VER
 
-COPY asf /opt
+COPY asf /opt/asf
 VOLUME /opt/asf/config
 WORKDIR /opt/asf
 
