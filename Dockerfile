@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM debian:latest
 
 LABEL author="Jat <chat@jat.email>"
 ARG VER
