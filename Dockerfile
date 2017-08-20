@@ -1,4 +1,4 @@
-FROM microsoft/dotnet:latest
+FROM microsoft/dotnet:runtime
 
 LABEL author="Jat <chat@jat.email>"
 ARG VER
