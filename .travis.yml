@@ -10,7 +10,7 @@ before_script:
   - REL=$(curl https://api.github.com/repos/JustArchi/ArchiSteamFarm/releases/latest)
   - VER=$(echo "$REL" | jq -r '.tag_name')
 
-  - curl -f "https://index.docker.io/v1/repositories/$NAME/tags/$VER" && travis_terminate 0
+  - 'curl -f "https://index.docker.io/v1/repositories/$NAME/tags/$VER" && travis_terminate 0 || :'
   - docker login -u=jat001 -p="$DOCKER_PASSWD"
 
 script:
