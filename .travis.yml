@@ -4,18 +4,19 @@ services:
 env:
   - NAME=jat001/archisteamfarm
 
-install: true
+before_install:
+  - VER=$(curl https://api.github.com/repos/JustArchi/ArchiSteamFarm/releases/latest | jq -r '.tag_name')
+  - 'curl -f "https://index.docker.io/v1/repositories/$NAME/tags/$VER" && travis_terminate 0 || :'
+
+install:
+  - wget --content-disposition "https://github.com/JustArchi/ArchiSteamFarm/releases/download/$VER/ASF-linux-x64.zip"
+  - unzip ASF-linux-x64.zip -d asf
+  - chmod +x asf/ArchiSteamFarm
 
 before_script:
-  - REL=$(curl https://api.github.com/repos/JustArchi/ArchiSteamFarm/releases/latest)
-  - VER=$(echo "$REL" | jq -r '.tag_name')
-
-  - 'curl -f "https://index.docker.io/v1/repositories/$NAME/tags/$VER" && travis_terminate 0 || :'
   - docker login -u=jat001 -p="$DOCKER_PASSWD"
 
 script:
-  - curl -Lo ASF.exe "$(echo '$REL' | jq -r '.assets[] | select(.name == "ASF.exe").browser_download_url')"
-
   - docker build -t "$NAME:$VER" --build-arg "VER=$VER" .
   - docker tag "$NAME:$VER" "$NAME:latest"
 

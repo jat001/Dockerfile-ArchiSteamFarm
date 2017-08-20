@@ -1,14 +1,12 @@
-FROM mono:latest
+FROM alpine:latest
 
 LABEL author="Jat <chat@jat.email>"
 ARG VER
 LABEL version=$VER
 
-RUN mkdir -p /opt/asf/config
+COPY asf /opt
 VOLUME /opt/asf/config
 WORKDIR /opt/asf
 
-COPY ASF.exe .
-
-ENTRYPOINT ["mono", "ASF.exe"]
+ENTRYPOINT ["/opt/asf/ArchiSteamFarm"]
 CMD ["--server"]
