@@ -1,4 +1,4 @@
-FROM debian:latest
+FROM microsoft/dotnet:latest
 
 LABEL author="Jat <chat@jat.email>"
 ARG VER
