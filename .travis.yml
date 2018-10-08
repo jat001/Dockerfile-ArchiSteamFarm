@@ -5,11 +5,11 @@ env:
   - NAME=jat001/archisteamfarm
 
 before_install:
-  - VER=$(curl https://api.github.com/repos/JustArchi/ArchiSteamFarm/releases/latest | jq -r '.tag_name')
+  - VER=$(curl https://api.github.com/repos/JustArchiNET/ArchiSteamFarm/releases/latest | jq -r '.tag_name')
   - 'curl -f "https://index.docker.io/v1/repositories/$NAME/tags/$VER" && travis_terminate 0 || :'
 
 install:
-  - wget --content-disposition "https://github.com/JustArchi/ArchiSteamFarm/releases/download/$VER/ASF-linux-x64.zip"
+  - wget --content-disposition "https://github.com/JustArchiNET/ArchiSteamFarm/releases/download/$VER/ASF-linux-x64.zip"
   - unzip ASF-linux-x64.zip -d asf
   - chmod +x asf/ArchiSteamFarm
 
